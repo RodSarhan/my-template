@@ -3,11 +3,18 @@
     "compilerOptions": {
         "strict": true,
         "paths": {
-            "@/*": ["./*"],
+            "~app/*": ["./app/*"],
             "~assets/*": ["./assets/*"],
             "~features/*": ["./features/*"],
             "~constants/*": ["./constants/*"],
-            "~styles/*": ["./styles/*"]
+            "~styles/*": ["./styles/*"],
+            "~libs/*": ["./libs/*"],
+            "~localization/*": ["./localization/*"],
+            "~networking/*": ["./networking/*"],
+            "~utils/*": ["./utils/*"],
+            "~types/*": ["./types/*"],
+            "~global/*": ["./global/*"],
+            "~components/*": ["./components/*"],
         },
     },
     "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
