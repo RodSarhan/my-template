@@ -2,20 +2,20 @@
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
         "strict": true,
+        "baseUrl": ".",
         "paths": {
-            "~app/*": ["./app/*"],
+            "~app/*": ["./src/app/*"],
             "~assets/*": ["./assets/*"],
-            "~features/*": ["./features/*"],
-            "~constants/*": ["./constants/*"],
-            "~styles/*": ["./styles/*"],
-            "~libs/*": ["./libs/*"],
-            "~localization/*": ["./localization/*"],
-            "~networking/*": ["./networking/*"],
-            "~utils/*": ["./utils/*"],
-            "~types/*": ["./types/*"],
-            "~global/*": ["./global/*"],
-            "~components/*": ["./components/*"],
-        },
+            "~constants/*": ["./src/constants/*"],
+            "~styles/*": ["./src/styles/*"],
+            "~libs/*": ["./src/libs/*"],
+            "~localization/*": ["./src/localization/*"],
+            "~networking/*": ["./src/networking/*"],
+            "~utils/*": ["./src/utils/*"],
+            "~types/*": ["./src/types/*"],
+            "~global/*": ["./src/global/*"],
+            "~components/*": ["./src/components/*"]
+        }
     },
     "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

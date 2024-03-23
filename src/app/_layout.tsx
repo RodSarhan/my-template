@@ -20,7 +20,7 @@ export {
 
 export const unstable_settings = {
     // Ensure that reloading on `/modal` keeps a back button present.
-    initialRouteName: '(mainstack)',
+    initialRouteName: '(app)',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -28,7 +28,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
     const [loaded, error] = useFonts({
-        SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+        SpaceMono: require('~assets/fonts/SpaceMono-Regular.ttf'),
         ...FontAwesome.font,
     });
 
@@ -61,7 +61,8 @@ function RootLayoutNav() {
             >
                 <StatusBar style={theme.props.statusBarText} />
                 <Stack>
-                    <Stack.Screen name="(mainstack)" options={{headerShown: false}} />
+                    <Stack.Screen name="(app)" options={{headerShown: false}} />
+                    <Stack.Screen name="sign-in" options={{title: 'Sign In'}} />
                     <Stack.Screen name="modal" options={{presentation: 'modal'}} />
                 </Stack>
             </ThemeProvider>

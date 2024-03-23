@@ -1,5 +1,4 @@
 import {UnistylesRegistry} from 'react-native-unistyles';
-import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {breakpoints} from '~styles/breakpoints';
 import {darkTheme, lightTheme} from '~styles/theme';
 

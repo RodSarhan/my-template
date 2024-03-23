@@ -1,7 +1,7 @@
 import i18n, {LanguageDetectorModule, changeLanguage} from 'i18next';
 import {initReactI18next} from 'react-i18next';
-import en from './locales/en/translation.json';
-import { useGeneralStore } from '~global/GlobalStores/general-store';
+import en from '~localization/locales/en/translation.json';
+import {useGeneralStore} from '~global/GlobalStores/general-store';
 
 const languageDetector: LanguageDetectorModule = {
     type: 'languageDetector',
