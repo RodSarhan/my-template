@@ -1,6 +1,3 @@
-import {UnistylesRuntime} from 'react-native-unistyles';
-import {LocalStorage} from '~global/LocalStorage/local-storage';
-import {navigationDarkTheme, navigationLightTheme} from '~styles/navigation-themes';
 import {hexToRGBA} from '~styles/style-helpers';
 
 const sharedColors = {
@@ -107,8 +104,3 @@ export const darkTheme = {
     },
     props: {statusBarText: 'light'},
 } as const;
-
-export const changeTheme = (theme: 'light' | 'dark') => {
-    LocalStorage.general.setTheme(theme);
-    UnistylesRuntime.setTheme(theme === 'dark' ? 'dark' : 'light');
-};

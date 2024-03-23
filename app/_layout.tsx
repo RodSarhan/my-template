@@ -1,14 +1,17 @@
 import {queryClient} from '~libs/query-client';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import {DefaultTheme, ThemeProvider} from '@react-navigation/native';
+import {ThemeProvider} from '@react-navigation/native';
 import {QueryClientProvider} from '@tanstack/react-query';
 import {useFonts} from 'expo-font';
 import {Stack} from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import {useEffect} from 'react';
 import '~styles/unistyles';
-import {useStyles} from 'react-native-unistyles';
+import '~localization/i18n';
+import {useInitialTheme, useStyles} from 'react-native-unistyles';
 import {navigationDarkTheme, navigationLightTheme} from '~styles/navigation-themes';
+import {StatusBar} from 'expo-status-bar';
+import {useGeneralStore} from '~global/GlobalStores/general-store';
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -48,12 +51,15 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+    const selectedTheme = useGeneralStore((state) => state.theme);
+    useInitialTheme(selectedTheme);
     const {theme} = useStyles();
     return (
         <QueryClientProvider client={queryClient}>
             <ThemeProvider
                 value={theme.theme === 'dark' ? navigationDarkTheme : navigationLightTheme}
             >
+                <StatusBar style={theme.props.statusBarText} />
                 <Stack>
                     <Stack.Screen name="(mainstack)" options={{headerShown: false}} />
                     <Stack.Screen name="modal" options={{presentation: 'modal'}} />

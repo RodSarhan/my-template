@@ -12,10 +12,9 @@ export default function TabLayout() {
                 // to prevent a hydration error in React Navigation v6.
                 headerShown: useClientOnlyValue(false, false),
             }}
-            initialRouteName="one"
         >
             <Stack.Screen
-                name="one"
+                name="index"
                 options={{
                     title: 'Tab One',
                     headerRight: () => (

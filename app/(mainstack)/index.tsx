@@ -12,12 +12,12 @@ import {createStyleSheet, useStyles} from 'react-native-unistyles';
 import switchTheme from 'react-native-theme-switch-animation';
 import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {router, usePathname} from 'expo-router';
-import {useTranslation} from 'react-i18next';
 
-export default function TabTwoScreen() {
+export default function TabOneScreen() {
     const {styles, theme} = useStyles(styleSheet);
-    const {t} = useTranslation();
     const toggleTheme = useGeneralStore((state) => state.toggleTheme);
+    const pathname = usePathname();
+    console.log('pathname', pathname);
 
     const onPressChangeTheme = useCallback(
         (e: GestureResponderEvent) => {
@@ -38,18 +38,19 @@ export default function TabTwoScreen() {
         [theme],
     );
 
-    const onPressGoHome = useCallback(() => {
-        router.dismissAll();
+    const onPressNavigateToTwo = useCallback(() => {
+        // navigate to tab two
+        router.navigate({
+            pathname: '/two',
+        });
     }, []);
-    const pathname = usePathname();
-    console.log('pathname', pathname);
 
     return (
         <View style={styles.container}>
             <View style={{height: 50, width: 50, backgroundColor: theme.colors.primary300}} />
             <View style={{marginTop: 50}} />
-            <TouchableOpacity onPress={onPressGoHome} style={styles.touchable}>
-                <Text style={styles.title}>{t('go-home')}</Text>
+            <TouchableOpacity onPress={onPressNavigateToTwo} style={styles.touchable}>
+                <Text style={styles.title}>navigate to two</Text>
             </TouchableOpacity>
             <View style={{marginTop: 200}} />
             <TouchableOpacity
