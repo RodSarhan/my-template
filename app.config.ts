@@ -4,9 +4,9 @@ const IS_DEV = process.env.APP_VARIANT === "development";
 module.exports = (): ExpoConfig => {
     return {
         owner: "rodsar",
-        name: IS_DEV ? "Simple Reminders (S)" : "Simple Reminders",
-        slug: "simple-reminders",
-        scheme: "simplereminders",
+        name: IS_DEV ? "My Template (S)" : "My Template",
+        slug: "my-template",
+        scheme: "mytemplate",
         version: "1.0.0",
         orientation: "portrait",
         icon: "./assets/images/icon.png",
@@ -20,14 +20,14 @@ module.exports = (): ExpoConfig => {
         backgroundColor: "#000000",
         ios: {
             bundleIdentifier: IS_DEV
-                ? "com.rodsarhan.simplereminders.staging"
-                : "com.rodsarhan.simplereminders",
+                ? "com.rodsarhan.mytemplate.staging"
+                : "com.rodsarhan.mytemplate",
             supportsTablet: true,
         },
         android: {
             package: IS_DEV
-                ? "com.rodsarhan.simplereminders.staging"
-                : "com.rodsarhan.simplereminders",
+                ? "com.rodsarhan.mytemplate.staging"
+                : "com.rodsarhan.mytemplate",
             adaptiveIcon: {
                 foregroundImage: "./assets/images/adaptive-icon.png",
                 backgroundColor: "#ffffff",
