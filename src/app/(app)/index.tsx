@@ -1,8 +1,9 @@
-import {TouchableOpacity, View, Text, Pressable} from 'react-native';
-import {useCallback} from 'react';
-import {createStyleSheet, useStyles} from 'react-native-unistyles';
-import {Link, Stack} from 'expo-router';
 import {FontAwesome} from '@expo/vector-icons';
+import {Link, Stack} from 'expo-router';
+import {useCallback} from 'react';
+import {TouchableOpacity, View, Text, Pressable} from 'react-native';
+import {createStyleSheet, useStyles} from 'react-native-unistyles';
+
 import {useUserStore} from '~global/GlobalStores/user-store';
 
 export default function TabOneScreen() {
@@ -11,7 +12,7 @@ export default function TabOneScreen() {
 
     const onPressSignOut = useCallback(() => {
         setUser(undefined);
-    }, []);
+    }, [setUser]);
 
     return (
         <View style={styles.container}>

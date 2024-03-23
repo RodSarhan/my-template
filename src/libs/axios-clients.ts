@@ -6,7 +6,7 @@ export const defaultAxiosClient = Axios.create({
 });
 
 export const setDefaultAxiosClientToken = (token: string | undefined) => {
-    defaultAxiosClient.defaults.headers.common['Authorization'] = `Bearer ${token ?? ''}`;
+    defaultAxiosClient.defaults.headers.common.Authorization = `Bearer ${token ?? ''}`;
 };
 
 defaultAxiosClient.interceptors.request.use(

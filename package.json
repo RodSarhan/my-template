@@ -5,6 +5,7 @@
   "scripts": {
     "test": "jest --watchAll",
     "lint": "eslint .",
+    "format": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "test-types": "tsc --noEmit",
     "// Dev": "",
     "prebuild-dev": "APP_VARIANT=development expo prebuild --clean",
@@ -65,10 +66,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@react-native/eslint-config": "^0.75.0-main",
+    "@tanstack/eslint-plugin-query": "^5.28.6",
     "@types/react": "~18.2.45",
     "babel-plugin-module-resolver": "^5.0.0",
+    "eslint": "^8.57.0",
     "jest": "^29.2.1",
     "jest-expo": "~50.0.2",
+    "prettier": "^3.2.5",
     "react-test-renderer": "18.2.0",
     "typescript": "^5.1.3"
   },

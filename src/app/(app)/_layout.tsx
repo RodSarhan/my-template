@@ -1,5 +1,6 @@
-import React from 'react';
 import {Stack, Redirect} from 'expo-router';
+import React from 'react';
+
 import {useUserStore} from '~global/GlobalStores/user-store';
 
 export default function AppLayout() {
