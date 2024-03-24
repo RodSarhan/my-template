@@ -1,12 +1,11 @@
 import {FontAwesome} from '@expo/vector-icons';
-import {Link, Stack} from 'expo-router';
-import {useCallback} from 'react';
-import {TouchableOpacity, View, Text, Pressable} from 'react-native';
+import {ErrorBoundaryProps, Link, Stack} from 'expo-router';
+import {useCallback, useState} from 'react';
+import {View, Text, Pressable, ScrollView, PressableStateCallbackType} from 'react-native';
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
-
 import {useUserStore} from '~global/GlobalStores/user-store';
 
-export default function TabOneScreen() {
+export default function HomeScreen() {
     const {styles, theme} = useStyles(styleSheet);
     const setUser = useUserStore((state) => state.setUser);
 
@@ -15,7 +14,7 @@ export default function TabOneScreen() {
     }, [setUser]);
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <Stack.Screen
                 options={{
                     title: 'Home',
@@ -35,9 +34,19 @@ export default function TabOneScreen() {
                     ),
                 }}
             />
-            <TouchableOpacity onPress={onPressSignOut} style={styles.touchable}>
+            <Pressable onPress={onPressSignOut} style={styles.signOutPressable}>
                 <Text style={styles.title}>Sign Out</Text>
-            </TouchableOpacity>
+            </Pressable>
+        </ScrollView>
+    );
+}
+
+export function ErrorBoundary(props: ErrorBoundaryProps) {
+    const {theme} = useStyles();
+    return (
+        <View style={{flex: 1, backgroundColor: theme.colors.red500}}>
+            <Text>{props.error.message}</Text>
+            <Text onPress={props.retry}>Try Again?</Text>
         </View>
     );
 }
@@ -45,18 +54,20 @@ export default function TabOneScreen() {
 const styleSheet = createStyleSheet((theme, runtime) => ({
     container: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: theme.colors.primary900,
-        paddingTop: runtime.insets.top,
+        paddingTop: 10,
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         color: theme.colors.primary800,
     },
-    touchable: {
+    signOutPressable: ({pressed}: PressableStateCallbackType) => ({
         backgroundColor: theme.colors.primary300,
-        padding: 40,
-        borderRadius: 5,
-    },
+        padding: 10,
+        borderRadius: 10,
+        width: '50%',
+        alignItems: 'center',
+        opacity: pressed ? 0.5 : 1,
+    }),
 }));

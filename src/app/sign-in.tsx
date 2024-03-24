@@ -1,7 +1,7 @@
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {router} from 'expo-router';
 import {useCallback} from 'react';
-import {TouchableOpacity, View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, PressableStateCallbackType} from 'react-native';
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
 
 import {useGeneralStore} from '~global/GlobalStores/general-store';
@@ -19,9 +19,9 @@ export default function SingInScreen() {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={onPressSignIn} style={styles.touchable}>
+            <Pressable onPress={onPressSignIn} style={styles.signInPressable}>
                 <Text style={styles.title}>Sign In</Text>
-            </TouchableOpacity>
+            </Pressable>
             <Pressable onPress={toggleTheme} style={styles.themeButton}>
                 <MaterialCommunityIcons
                     name="theme-light-dark"
@@ -36,20 +36,22 @@ export default function SingInScreen() {
 const styleSheet = createStyleSheet((theme, runtime) => ({
     container: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: theme.colors.primary900,
-        paddingTop: runtime.insets.top,
+        paddingTop: 10,
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         color: theme.colors.primary800,
     },
-    touchable: {
-        backgroundColor: theme.colors.primary300,
-        padding: 40,
-        borderRadius: 5,
-    },
+    signInPressable: ({pressed}: PressableStateCallbackType) => ({
+        backgroundColor: theme.colors.bg500,
+        padding: 10,
+        borderRadius: 10,
+        width: '50%',
+        alignItems: 'center',
+        opacity: pressed ? 0.5 : 1,
+    }),
     themeButton: {
         borderRadius: 100,
         padding: 15,
