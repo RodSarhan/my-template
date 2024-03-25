@@ -1,5 +1,5 @@
 import {FontAwesome} from '@expo/vector-icons';
-import {ErrorBoundaryProps, Link, Stack} from 'expo-router';
+import {ErrorBoundaryProps, Link, Stack, router} from 'expo-router';
 import {useCallback, useState} from 'react';
 import {View, Text, Pressable, ScrollView, PressableStateCallbackType} from 'react-native';
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
@@ -12,6 +12,12 @@ export default function HomeScreen() {
     const onPressSignOut = useCallback(() => {
         setUser(undefined);
     }, [setUser]);
+
+    const onPressGoToPokemonList = useCallback(() => {
+        router.navigate({
+            pathname: '/pokemon-list/',
+        });
+    }, []);
 
     return (
         <ScrollView style={styles.container}>
@@ -34,7 +40,10 @@ export default function HomeScreen() {
                     ),
                 }}
             />
-            <Pressable onPress={onPressSignOut} style={styles.signOutPressable}>
+            <Pressable onPress={onPressGoToPokemonList} style={styles.pressable}>
+                <Text style={styles.title}>Go To Pokemon List</Text>
+            </Pressable>
+            <Pressable onPress={onPressSignOut} style={styles.pressable}>
                 <Text style={styles.title}>Sign Out</Text>
             </Pressable>
         </ScrollView>
@@ -62,7 +71,7 @@ const styleSheet = createStyleSheet((theme, runtime) => ({
         fontWeight: 'bold',
         color: theme.colors.primary800,
     },
-    signOutPressable: ({pressed}: PressableStateCallbackType) => ({
+    pressable: ({pressed}: PressableStateCallbackType) => ({
         backgroundColor: theme.colors.primary300,
         padding: 10,
         borderRadius: 10,

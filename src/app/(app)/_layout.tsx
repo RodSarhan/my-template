@@ -3,6 +3,10 @@ import React from 'react';
 
 import {useUserStore} from '~global/GlobalStores/user-store';
 
+export const unstable_settings = {
+    initialRouteName: 'index',
+};
+
 export default function AppLayout() {
     const user = useUserStore((state) => state.user);
 

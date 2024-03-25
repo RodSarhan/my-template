@@ -17,6 +17,7 @@
     "build-dev-ios": "APP_VARIANT=development eas build --platform ios --local --profile development",
     "build-dev-android": "APP_VARIANT=development eas build --platform android --local --profile development",
     "open-url-ios": "wrapper() { npx uri-scheme open mytemplate://$1 --ios; }; wrapper ",
+    "open-url-android": "wrapper() { npx uri-scheme open mytemplate://$1 --android; }; wrapper ",
     "// Prod": "",
     "prebuild-production": "APP_VARIANT=production expo prebuild --clean",
     "build-production-android": "APP_VARIANT=production eas build --platform android --local --profile production",
