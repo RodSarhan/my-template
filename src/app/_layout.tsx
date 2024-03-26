@@ -15,6 +15,9 @@ import {useInitialTheme, useStyles} from 'react-native-unistyles';
 import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {queryClient} from '~libs/query-client';
 import {navigationDarkTheme, navigationLightTheme} from '~styles/navigation-themes';
+import {enableFreeze} from 'react-native-screens';
+
+enableFreeze(true);
 
 if (__DEV__) {
     //@ts-ignore

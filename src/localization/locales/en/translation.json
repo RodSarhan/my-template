@@ -1,4 +1,6 @@
 {
     "confirm": "confirm",
-    "go-home": "go home"
+    "go-home": "go home",
+    "found-count-pokemon_one": "found {{ count }} pokemon",
+    "found-count-pokemon_other": "found {{ count }} pokemons"
 }

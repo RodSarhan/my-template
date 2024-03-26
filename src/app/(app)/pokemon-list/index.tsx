@@ -10,6 +10,7 @@ import {FlashList} from '@shopify/flash-list';
 import {INamedApiResource, IPokemon} from 'pokeapi-typescript';
 import {ExpoImage} from '~components/ExpoImage';
 import {queryClient} from '~libs/query-client';
+import {useTranslation} from 'react-i18next';
 
 const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => {
     const {data: pokemonDetails} = useQuery(PokemonQueries.pokemonDetailsQuery(pokemon.name));
@@ -30,15 +31,14 @@ const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => 
                 source={{uri: pokemonDetails?.sprites.front_default}}
                 style={{height: 100, width: 100}}
             />
-            <Text key={pokemon.name + '-name'} style={{fontSize: 20, fontWeight: 'bold'}}>
-                {pokemon.name}
-            </Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemon.name}</Text>
         </Pressable>
     );
 };
 
 export default function PokemonListScreen() {
     const {styles, theme} = useStyles(styleSheet);
+    const {t} = useTranslation();
     const flashlistRef = useRef<FlashList<INamedApiResource<IPokemon>>>(null);
 
     const {
@@ -82,20 +82,22 @@ export default function PokemonListScreen() {
                 }}
             />
             {!!pokemonList && (
-                <FlashList
-                    data={pokemonList}
-                    renderItem={({item}) => <PokemonComponent pokemon={item} key={item.name} />}
-                    onEndReached={() => {
-                        if (hasNextPage && !isFetching) {
-                            fetchNextPage();
-                        }
-                    }}
-                    onEndReachedThreshold={0.5}
-                    estimatedItemSize={119}
-                    ref={flashlistRef}
-                    // numColumns={3}
-                    keyExtractor={(item) => item.name}
-                />
+                <>
+                    <Text>{t('found-count-pokemon', {count: pokemonList.length})}</Text>
+                    <FlashList
+                        data={pokemonList}
+                        renderItem={({item}) => <PokemonComponent pokemon={item} key={item.name} />}
+                        onEndReached={() => {
+                            if (hasNextPage && !isFetching) {
+                                fetchNextPage();
+                            }
+                        }}
+                        onEndReachedThreshold={0.1}
+                        estimatedItemSize={119}
+                        ref={flashlistRef}
+                        numColumns={3}
+                    />
+                </>
             )}
         </View>
     );

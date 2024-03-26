@@ -4,6 +4,7 @@ import {useCallback, useState} from 'react';
 import {View, Text, Pressable, ScrollView, PressableStateCallbackType} from 'react-native';
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
 import {useUserStore} from '~global/GlobalStores/user-store';
+import {bustPersistQueryClient, removeAllQueries} from '~libs/query-client';
 
 export default function HomeScreen() {
     const {styles, theme} = useStyles(styleSheet);
@@ -11,6 +12,8 @@ export default function HomeScreen() {
 
     const onPressSignOut = useCallback(() => {
         setUser(undefined);
+        bustPersistQueryClient();
+        removeAllQueries();
     }, [setUser]);
 
     const onPressGoToPokemonList = useCallback(() => {

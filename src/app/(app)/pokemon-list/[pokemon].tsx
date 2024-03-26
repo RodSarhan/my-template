@@ -19,22 +19,34 @@ export default function PokemonDetailsScreen() {
                     title: params.pokemon.toUpperCase(),
                 }}
             />
-            <ExpoImage
-                source={{uri: pokemonDetails?.sprites.front_default}}
-                style={{height: 200, width: 200}}
-            />
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemonDetails?.name}</Text>
-            <Text>{`Height: ${pokemonDetails?.height}`}</Text>
-            <Text>{`Weight: ${pokemonDetails?.weight}`}</Text>
-            <Text>{`Base Experience: ${pokemonDetails?.base_experience}`}</Text>
+
+            {!!pokemonDetails && (
+                <>
+                    <ExpoImage
+                        source={{uri: pokemonDetails?.sprites.front_default}}
+                        style={{height: 200, width: 200}}
+                    />
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemonDetails?.name}</Text>
+                    <Text>{`Height: ${pokemonDetails?.height}`}</Text>
+                    <Text>{`Weight: ${pokemonDetails?.weight}`}</Text>
+                    <Text>{`Base Experience: ${pokemonDetails?.base_experience}`}</Text>
+                </>
+            )}
         </View>
     );
 }
 
 export function ErrorBoundary(props: ErrorBoundaryProps) {
     const {theme} = useStyles();
+    const params = useLocalSearchParams<{pokemon: string}>();
+
     return (
         <View style={{flex: 1, backgroundColor: theme.colors.red500}}>
+            <Stack.Screen
+                options={{
+                    title: params.pokemon.toUpperCase(),
+                }}
+            />
             <Text>{props.error.message}</Text>
             <Text onPress={props.retry}>Try Again?</Text>
         </View>

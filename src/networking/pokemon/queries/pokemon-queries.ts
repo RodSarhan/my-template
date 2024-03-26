@@ -17,6 +17,7 @@ const pokemonDetailsQuery = (pokemonName: string) => {
     return queryOptions({
         queryKey: ['pokemon', 'details', pokemonName],
         queryFn: async () => PokemonApi.getPokemonDetails(pokemonName),
+        throwOnError: true,
     });
 };
 

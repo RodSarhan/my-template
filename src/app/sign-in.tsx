@@ -6,6 +6,7 @@ import {createStyleSheet, useStyles} from 'react-native-unistyles';
 
 import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {useUserStore} from '~global/GlobalStores/user-store';
+import {bustPersistQueryClient, removeAllQueries} from '~libs/query-client';
 
 export default function SingInScreen() {
     const {styles, theme} = useStyles(styleSheet);
@@ -14,6 +15,8 @@ export default function SingInScreen() {
 
     const onPressSignIn = useCallback(() => {
         setUser({username: 'jhon', fullName: 'John Doe'});
+        bustPersistQueryClient('jhon');
+        removeAllQueries();
         router.replace('/');
     }, [setUser]);
 

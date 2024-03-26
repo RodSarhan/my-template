@@ -65,6 +65,7 @@
     "expo-web-browser": "~12.8.2",
     "i18next": "^23.10.1",
     "immer": "^10.0.4",
+    "intl-pluralrules": "^2.0.1",
     "numeral": "^2.0.6",
     "pokeapi-typescript": "^2.1.0",
     "react": "18.2.0",
