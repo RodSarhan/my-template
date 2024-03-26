@@ -44,7 +44,7 @@ module.exports = (): ExpoConfig => {
         },
         extra: {
             eas: {
-                projectId: "03c57294-b20d-4053-a49b-902f96380579",
+                projectId: "3a968ac9-f493-4d18-8ddd-d9e8b3277f95",
             },
         },
     };
