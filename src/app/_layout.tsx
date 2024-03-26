@@ -16,6 +16,11 @@ import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {queryClient} from '~libs/query-client';
 import {navigationDarkTheme, navigationLightTheme} from '~styles/navigation-themes';
 
+if (__DEV__) {
+    //@ts-ignore
+    import('./../../ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
 // Catch any errors thrown by the Layout component.
 export {ErrorBoundary} from 'expo-router';
 

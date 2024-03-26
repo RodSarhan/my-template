@@ -10,7 +10,6 @@ import {FlashList} from '@shopify/flash-list';
 import {INamedApiResource, IPokemon} from 'pokeapi-typescript';
 import {ExpoImage} from '~components/ExpoImage';
 import {queryClient} from '~libs/query-client';
-import Animated, {withSpring} from 'react-native-reanimated';
 
 const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => {
     const {data: pokemonDetails} = useQuery(PokemonQueries.pokemonDetailsQuery(pokemon.name));
@@ -27,18 +26,13 @@ const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => 
             onPress={onPressPokemon}
             style={{alignItems: 'center', justifyContent: 'center', flex: 1}}
         >
-            <Animated.Image
+            <ExpoImage
                 source={{uri: pokemonDetails?.sprites.front_default}}
                 style={{height: 100, width: 100}}
-                sharedTransitionTag={pokemon.name + '-image'}
             />
-            <Animated.Text
-                sharedTransitionTag={pokemon.name + '-name'}
-                key={pokemon.name + '-name'}
-                style={{fontSize: 20, fontWeight: 'bold'}}
-            >
+            <Text key={pokemon.name + '-name'} style={{fontSize: 20, fontWeight: 'bold'}}>
                 {pokemon.name}
-            </Animated.Text>
+            </Text>
         </Pressable>
     );
 };

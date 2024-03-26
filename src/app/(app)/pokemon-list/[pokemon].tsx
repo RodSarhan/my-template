@@ -6,7 +6,6 @@ import {View, Text, Pressable, ScrollView, PressableStateCallbackType} from 'rea
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
 import {PokemonQueries} from '~networking/pokemon/queries/pokemon-queries';
 import {ExpoImage} from '~components/ExpoImage';
-import Animated, {withSpring} from 'react-native-reanimated';
 
 export default function PokemonDetailsScreen() {
     const {styles, theme} = useStyles(styleSheet);
@@ -20,17 +19,11 @@ export default function PokemonDetailsScreen() {
                     title: params.pokemon.toUpperCase(),
                 }}
             />
-            <Animated.Image
+            <ExpoImage
                 source={{uri: pokemonDetails?.sprites.front_default}}
                 style={{height: 200, width: 200}}
-                sharedTransitionTag={params.pokemon + '-image'}
             />
-            <Animated.Text
-                style={{fontSize: 20, fontWeight: 'bold'}}
-                sharedTransitionTag={params.pokemon + '-name'}
-            >
-                {pokemonDetails?.name}
-            </Animated.Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemonDetails?.name}</Text>
             <Text>{`Height: ${pokemonDetails?.height}`}</Text>
             <Text>{`Weight: ${pokemonDetails?.weight}`}</Text>
             <Text>{`Base Experience: ${pokemonDetails?.base_experience}`}</Text>
