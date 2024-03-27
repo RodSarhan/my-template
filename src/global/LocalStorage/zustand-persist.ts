@@ -16,14 +16,14 @@ const removeZustandStorageValue = (key: string) => {
 export const zustandPersistStorage: StateStorage =
     typeof window != 'undefined'
         ? {
-              getItem: async (key: string): Promise<string | null> => {
+              getItem: (key: string) => {
                   return getZustandStorageValue(key) || null;
               },
-              setItem: async (name: string, value: string): Promise<void> => {
-                  return setZustandStorageValue(name, value);
+              setItem: (name: string, value: string) => {
+                  setZustandStorageValue(name, value);
               },
-              removeItem: async (name: string): Promise<void> => {
-                  return removeZustandStorageValue(name);
+              removeItem: (name: string) => {
+                  removeZustandStorageValue(name);
               },
           }
         : (undefined as unknown as StateStorage);

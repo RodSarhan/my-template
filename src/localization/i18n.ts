@@ -28,7 +28,7 @@ i18n.use(initReactI18next)
         defaultNS,
         resources,
         fallbackLng: 'en',
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false,
         },

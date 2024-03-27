@@ -12,8 +12,8 @@ export default function HomeScreen() {
 
     const onPressSignOut = useCallback(() => {
         setUser(undefined);
-        bustPersistQueryClient();
         removeAllQueries();
+        bustPersistQueryClient();
     }, [setUser]);
 
     const onPressGoToPokemonList = useCallback(() => {

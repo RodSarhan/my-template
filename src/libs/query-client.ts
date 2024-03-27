@@ -5,6 +5,7 @@ import {defaultShouldDehydrateQuery} from '@tanstack/react-query';
 import NetInfo from '@react-native-community/netinfo';
 import {onlineManager} from '@tanstack/react-query';
 import {useUserStore} from '~global/GlobalStores/user-store';
+import {REACT_QUERY_CACHE_VERSION} from '~constants/app-constants';
 
 onlineManager.setEventListener((setOnline) => {
     return NetInfo.addEventListener((state) => {
@@ -23,20 +24,23 @@ export const queryClient = new QueryClient({
     },
 });
 
-const persistClientOptions = (buster?: string): PersistQueryClientOptions => ({
-    queryClient,
-    persister: reactQueryClientPersister,
-    maxAge: 1000 * 60 * 60 * 12, // half a day
-    buster: buster ?? 'unknown-user',
-    dehydrateOptions: {
-        shouldDehydrateQuery: (query) => {
-            return defaultShouldDehydrateQuery(query) && query.meta?.persist !== false;
+const persistClientOptions = (buster?: string): PersistQueryClientOptions => {
+    const busterString = (buster ?? 'unknown-user') + `-${REACT_QUERY_CACHE_VERSION}`;
+    return {
+        queryClient,
+        persister: reactQueryClientPersister,
+        maxAge: 1000 * 60 * 60 * 12, // half a day
+        buster: busterString,
+        dehydrateOptions: {
+            shouldDehydrateQuery: (query) => {
+                return defaultShouldDehydrateQuery(query) && query.meta?.persist !== false;
+            },
+            shouldDehydrateMutation: (mutation) => {
+                return false;
+            },
         },
-        shouldDehydrateMutation: (mutation) => {
-            return false;
-        },
-    },
-});
+    };
+};
 
 persistQueryClient(persistClientOptions(useUserStore.getState().user?.username));
 

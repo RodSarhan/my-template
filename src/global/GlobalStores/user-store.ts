@@ -2,6 +2,7 @@ import {create} from 'zustand';
 import {immer} from 'zustand/middleware/immer';
 import {createJSONStorage, persist} from 'zustand/middleware';
 import {zustandPersistStorage} from '~global/LocalStorage/zustand-persist';
+import {USER_STORAGE_VERSION} from '~constants/app-constants';
 
 type UserStoreState = {
     user:
@@ -29,7 +30,7 @@ export const useUserStore = create<UserStoreState & UserStoreActions>()(
         {
             name: 'user-store',
             storage: createJSONStorage(() => zustandPersistStorage),
-            version: 1,
+            version: USER_STORAGE_VERSION,
         },
     ),
 );

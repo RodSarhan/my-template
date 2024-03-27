@@ -2,7 +2,7 @@ import {create} from 'zustand';
 import {immer} from 'zustand/middleware/immer';
 import {createJSONStorage, persist} from 'zustand/middleware';
 import {zustandPersistStorage} from '~global/LocalStorage/zustand-persist';
-import {SupportedLanguages} from '~constants/app-constants';
+import {GENERAL_STORAGE_VERSION, SupportedLanguages} from '~constants/app-constants';
 import {UnistylesRuntime} from 'react-native-unistyles';
 import {GestureResponderEvent} from 'react-native';
 import switchTheme from 'react-native-theme-switch-animation';
@@ -57,7 +57,7 @@ export const useGeneralStore = create<GeneralStoreState & GeneralStoreActions>()
         {
             name: 'general-store',
             storage: createJSONStorage(() => zustandPersistStorage),
-            version: 1,
+            version: GENERAL_STORAGE_VERSION,
         },
     ),
 );

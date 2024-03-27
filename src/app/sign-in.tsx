@@ -15,8 +15,8 @@ export default function SingInScreen() {
 
     const onPressSignIn = useCallback(() => {
         setUser({username: 'jhon', fullName: 'John Doe'});
-        bustPersistQueryClient('jhon');
         removeAllQueries();
+        bustPersistQueryClient('jhon');
         router.replace('/');
     }, [setUser]);
 
