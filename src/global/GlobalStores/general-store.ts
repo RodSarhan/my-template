@@ -6,6 +6,7 @@ import {GENERAL_STORAGE_VERSION, SupportedLanguages} from '~constants/app-consta
 import {UnistylesRuntime} from 'react-native-unistyles';
 import {GestureResponderEvent} from 'react-native';
 import switchTheme from 'react-native-theme-switch-animation';
+import {isWeb} from '~constants/web-constants';
 
 type GeneralStoreState = {
     theme: 'light' | 'dark';
@@ -58,8 +59,7 @@ export const useGeneralStore = create<GeneralStoreState & GeneralStoreActions>()
             name: 'general-store',
             storage: createJSONStorage(() => zustandPersistStorage),
             version: GENERAL_STORAGE_VERSION,
+            skipHydration: isWeb,
         },
     ),
 );
-
-(e: GestureResponderEvent) => {};

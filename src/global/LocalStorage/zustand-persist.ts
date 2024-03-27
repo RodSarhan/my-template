@@ -13,17 +13,14 @@ const removeZustandStorageValue = (key: string) => {
     zustandStorage.delete(key);
 };
 
-export const zustandPersistStorage: StateStorage =
-    typeof window != 'undefined'
-        ? {
-              getItem: (key: string) => {
-                  return getZustandStorageValue(key) || null;
-              },
-              setItem: (name: string, value: string) => {
-                  setZustandStorageValue(name, value);
-              },
-              removeItem: (name: string) => {
-                  removeZustandStorageValue(name);
-              },
-          }
-        : (undefined as unknown as StateStorage);
+export const zustandPersistStorage: StateStorage = {
+    getItem: (key: string) => {
+        return getZustandStorageValue(key) || null;
+    },
+    setItem: (name: string, value: string) => {
+        setZustandStorageValue(name, value);
+    },
+    removeItem: (name: string) => {
+        removeZustandStorageValue(name);
+    },
+};

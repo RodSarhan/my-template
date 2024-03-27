@@ -3,6 +3,7 @@ import {immer} from 'zustand/middleware/immer';
 import {createJSONStorage, persist} from 'zustand/middleware';
 import {zustandPersistStorage} from '~global/LocalStorage/zustand-persist';
 import {USER_STORAGE_VERSION} from '~constants/app-constants';
+import {isWeb} from '~constants/web-constants';
 
 type UserStoreState = {
     user:
@@ -31,6 +32,7 @@ export const useUserStore = create<UserStoreState & UserStoreActions>()(
             name: 'user-store',
             storage: createJSONStorage(() => zustandPersistStorage),
             version: USER_STORAGE_VERSION,
+            skipHydration: isWeb,
         },
     ),
 );

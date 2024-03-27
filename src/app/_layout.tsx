@@ -8,6 +8,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import '~styles/unistyles';
 import '~localization/i18n';
 import '~libs/dayjs';
+import '~libs/reactotron';
 import {StatusBar} from 'expo-status-bar';
 import {useEffect} from 'react';
 import {useInitialTheme, useStyles} from 'react-native-unistyles';
@@ -16,13 +17,9 @@ import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {queryClient} from '~libs/query-client';
 import {navigationDarkTheme, navigationLightTheme} from '~styles/navigation-themes';
 import {enableFreeze} from 'react-native-screens';
+import {useHydrateStores} from '~utils/hooks/useHydrateStores';
 
 enableFreeze(true);
-
-if (__DEV__) {
-    //@ts-ignore
-    import('./../../ReactotronConfig').then(() => console.log('Reactotron Configured'));
-}
 
 // Catch any errors thrown by the Layout component.
 export {ErrorBoundary} from 'expo-router';
@@ -36,23 +33,24 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-    const [loaded, error] = useFonts({
+    const [isFontLoaded, fontLoadingError] = useFonts({
         SpaceMono: require('~assets/fonts/SpaceMono-Regular.ttf'),
         ...FontAwesome.font,
     });
+    const isHydrated = useHydrateStores();
 
     // Expo Router uses Error Boundaries to catch errors in the navigation tree.
     useEffect(() => {
-        if (error) throw error;
-    }, [error]);
+        if (fontLoadingError) throw fontLoadingError;
+    }, [fontLoadingError]);
 
     useEffect(() => {
-        if (loaded) {
+        if (isFontLoaded && isHydrated) {
             SplashScreen.hideAsync();
         }
-    }, [loaded]);
+    }, [isFontLoaded, isHydrated]);
 
-    if (!loaded) {
+    if (!isFontLoaded || !isHydrated) {
         return null;
     }
 

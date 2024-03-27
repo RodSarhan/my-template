@@ -6,6 +6,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {onlineManager} from '@tanstack/react-query';
 import {useUserStore} from '~global/GlobalStores/user-store';
 import {REACT_QUERY_CACHE_VERSION} from '~constants/app-constants';
+import {isWeb} from '~constants/web-constants';
 
 onlineManager.setEventListener((setOnline) => {
     return NetInfo.addEventListener((state) => {
@@ -42,7 +43,14 @@ const persistClientOptions = (buster?: string): PersistQueryClientOptions => {
     };
 };
 
-persistQueryClient(persistClientOptions(useUserStore.getState().user?.username));
+export const rehydrateAndSubRQCache = () => {
+    const currentUsername = useUserStore.getState().user?.username;
+    return persistQueryClient(persistClientOptions(currentUsername));
+};
+
+if (!isWeb) {
+    rehydrateAndSubRQCache();
+}
 
 export const bustPersistQueryClient = (buster?: string) => {
     persistQueryClient(persistClientOptions(buster));
