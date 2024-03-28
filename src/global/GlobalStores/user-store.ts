@@ -2,8 +2,7 @@ import {create} from 'zustand';
 import {immer} from 'zustand/middleware/immer';
 import {createJSONStorage, persist} from 'zustand/middleware';
 import {zustandPersistStorage} from '~global/LocalStorage/zustand-persist';
-import {USER_STORAGE_VERSION} from '~constants/app-constants';
-import {isWeb} from '~constants/web-constants';
+import {USER_STORAGE_VERSION, isWeb} from '~utils/constants/app-constants';
 
 type UserStoreState = {
     user:

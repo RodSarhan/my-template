@@ -12,7 +12,13 @@ import {ExpoImage} from '~components/ExpoImage';
 import {queryClient} from '~libs/query-client';
 import {useTranslation} from 'react-i18next';
 
-const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => {
+const PokemonComponent = ({
+    pokemon,
+}: {
+    pokemon: {
+        name: string;
+    };
+}) => {
     const {data: pokemonDetails} = useQuery(PokemonQueries.pokemonDetailsQuery(pokemon.name));
 
     const onPressPokemon = useCallback(() => {
@@ -28,7 +34,7 @@ const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => 
             style={{alignItems: 'center', justifyContent: 'center', flex: 1}}
         >
             <ExpoImage
-                source={{uri: pokemonDetails?.sprites.front_default}}
+                source={{uri: pokemonDetails?.sprite}}
                 style={{height: 100, width: 100}}
             />
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemon.name}</Text>
@@ -39,7 +45,11 @@ const PokemonComponent = ({pokemon}: {pokemon: INamedApiResource<IPokemon>}) => 
 export default function PokemonListScreen() {
     const {styles, theme} = useStyles(styleSheet);
     const {t} = useTranslation();
-    const flashlistRef = useRef<FlashList<INamedApiResource<IPokemon>>>(null);
+    const flashlistRef = useRef<
+        FlashList<{
+            name: string;
+        }>
+    >(null);
 
     const {
         data: pokemonList,

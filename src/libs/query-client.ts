@@ -5,8 +5,7 @@ import {defaultShouldDehydrateQuery} from '@tanstack/react-query';
 import NetInfo from '@react-native-community/netinfo';
 import {onlineManager} from '@tanstack/react-query';
 import {useUserStore} from '~global/GlobalStores/user-store';
-import {REACT_QUERY_CACHE_VERSION} from '~constants/app-constants';
-import {isWeb} from '~constants/web-constants';
+import {REACT_QUERY_CACHE_VERSION, isWeb} from '~utils/constants/app-constants';
 
 onlineManager.setEventListener((setOnline) => {
     return NetInfo.addEventListener((state) => {

@@ -2,11 +2,10 @@ import {create} from 'zustand';
 import {immer} from 'zustand/middleware/immer';
 import {createJSONStorage, persist} from 'zustand/middleware';
 import {zustandPersistStorage} from '~global/LocalStorage/zustand-persist';
-import {GENERAL_STORAGE_VERSION, SupportedLanguages} from '~constants/app-constants';
+import {GENERAL_STORAGE_VERSION, SupportedLanguages, isWeb} from '~utils/constants/app-constants';
 import {UnistylesRuntime} from 'react-native-unistyles';
 import {GestureResponderEvent} from 'react-native';
 import switchTheme from 'react-native-theme-switch-animation';
-import {isWeb} from '~constants/web-constants';
 
 type GeneralStoreState = {
     theme: 'light' | 'dark';

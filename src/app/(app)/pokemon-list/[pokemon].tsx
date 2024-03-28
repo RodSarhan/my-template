@@ -23,13 +23,12 @@ export default function PokemonDetailsScreen() {
             {!!pokemonDetails && (
                 <>
                     <ExpoImage
-                        source={{uri: pokemonDetails?.sprites.front_default}}
+                        source={{uri: pokemonDetails?.sprite}}
                         style={{height: 200, width: 200}}
                     />
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemonDetails?.name}</Text>
                     <Text>{`Height: ${pokemonDetails?.height}`}</Text>
                     <Text>{`Weight: ${pokemonDetails?.weight}`}</Text>
-                    <Text>{`Base Experience: ${pokemonDetails?.base_experience}`}</Text>
                 </>
             )}
         </View>

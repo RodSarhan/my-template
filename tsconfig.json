@@ -6,7 +6,6 @@
         "paths": {
             "~app/*": ["./src/app/*"],
             "~assets/*": ["./assets/*"],
-            "~constants/*": ["./src/constants/*"],
             "~styles/*": ["./src/styles/*"],
             "~libs/*": ["./src/libs/*"],
             "~localization/*": ["./src/localization/*"],

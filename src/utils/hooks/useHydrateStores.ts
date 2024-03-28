@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {isWeb} from '~constants/web-constants';
+import {isWeb} from '~utils/constants/app-constants';
 import {useGeneralStore} from '~global/GlobalStores/general-store';
 import {useUserStore} from '~global/GlobalStores/user-store';
 import {rehydrateAndSubRQCache} from '~libs/query-client';
