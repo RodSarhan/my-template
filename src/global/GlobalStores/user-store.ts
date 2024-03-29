@@ -31,6 +31,7 @@ export const useUserStore = create<UserStoreState & UserStoreActions>()(
             name: 'user-store',
             storage: createJSONStorage(() => zustandPersistStorage),
             version: USER_STORAGE_VERSION,
+            // Hydrate manually on web
             skipHydration: isWeb,
         },
     ),

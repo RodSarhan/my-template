@@ -1,7 +1,9 @@
 import {StatusBar} from 'expo-status-bar';
-import {Platform, StyleSheet, View, Text} from 'react-native';
+import {Platform, View, Text} from 'react-native';
+import {createStyleSheet, useStyles} from 'react-native-unistyles';
 
 export default function ModalScreen() {
+    const {styles} = useStyles(sheet);
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Modal</Text>
@@ -13,7 +15,7 @@ export default function ModalScreen() {
     );
 }
 
-const styles = StyleSheet.create({
+const sheet = createStyleSheet({
     container: {
         flex: 1,
         alignItems: 'center',

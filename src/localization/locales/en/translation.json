@@ -1,6 +1,10 @@
 {
-    "confirm": "confirm",
-    "go-home": "go home",
-    "found-count-pokemon_one": "found {{ count }} pokemon",
-    "found-count-pokemon_other": "found {{ count }} pokemons"
+    "welcome-name": "Welcome, {{ name, titlecase }}!",
+    "confirm": "Confirm",
+    "go-home": "Go Home",
+    "found-count-pokemon_one": "Found {{ count }} pokemon",
+    "found-count-pokemon_other": "Found {{ count }} pokemons",
+    "trigger-error": "Trigger Error",
+    "sign-out": "Sign Out",
+    "sign-in": "Sign In"
 }

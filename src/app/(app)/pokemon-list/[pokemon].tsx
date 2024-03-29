@@ -1,16 +1,23 @@
-import {FontAwesome} from '@expo/vector-icons';
-import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
-import {ErrorBoundaryProps, Link, Stack, router, useLocalSearchParams} from 'expo-router';
-import {useCallback, useRef, useState} from 'react';
-import {View, Text, Pressable, ScrollView, PressableStateCallbackType} from 'react-native';
+import {useQuery} from '@tanstack/react-query';
+import {ErrorBoundaryProps, Stack, useLocalSearchParams} from 'expo-router';
+import {useCallback} from 'react';
+import {View, Text, Pressable, PressableStateCallbackType} from 'react-native';
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
 import {PokemonQueries} from '~networking/pokemon/queries/pokemon-queries';
-import {ExpoImage} from '~components/ExpoImage';
+import {ExpoImage} from '~components/common/ExpoImage';
+import {useTranslation} from 'react-i18next';
+import {useTriggerError} from '~utils/hooks/useScreenError';
 
 export default function PokemonDetailsScreen() {
-    const {styles, theme} = useStyles(styleSheet);
-    const params = useLocalSearchParams<{pokemon: string}>();
+    const triggerError = useTriggerError();
+    const {styles} = useStyles(sheet);
+    const {t} = useTranslation();
+    const params = useLocalSearchParams<'/(app)/pokemon-list/[pokemon]'>();
     const {data: pokemonDetails} = useQuery(PokemonQueries.pokemonDetailsQuery(params.pokemon));
+
+    const onPressTriggerError = useCallback(() => {
+        triggerError('This error was manually triggered');
+    }, [triggerError]);
 
     return (
         <View style={styles.container}>
@@ -31,13 +38,16 @@ export default function PokemonDetailsScreen() {
                     <Text>{`Weight: ${pokemonDetails?.weight}`}</Text>
                 </>
             )}
+            <Pressable onPress={onPressTriggerError} style={styles.button}>
+                <Text style={styles.buttonLabel}>{t('trigger-error')}</Text>
+            </Pressable>
         </View>
     );
 }
 
 export function ErrorBoundary(props: ErrorBoundaryProps) {
     const {theme} = useStyles();
-    const params = useLocalSearchParams<{pokemon: string}>();
+    const params = useLocalSearchParams<'/(app)/pokemon-list/[pokemon]'>();
 
     return (
         <View style={{flex: 1, backgroundColor: theme.colors.red500}}>
@@ -52,25 +62,26 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
     );
 }
 
-const styleSheet = createStyleSheet((theme, runtime) => ({
+const sheet = createStyleSheet((theme, runtime) => ({
     container: {
         flex: 1,
         backgroundColor: theme.colors.primary900,
         paddingTop: 10,
         width: '100%',
+        paddingHorizontal: 20,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    title: {
+    buttonLabel: {
         fontSize: 20,
         fontWeight: 'bold',
         color: theme.colors.primary800,
     },
-    pressable: ({pressed}: PressableStateCallbackType) => ({
+    button: ({pressed}: PressableStateCallbackType) => ({
+        marginTop: 10,
         backgroundColor: theme.colors.primary300,
         padding: 10,
         borderRadius: 10,
-        width: '50%',
         alignItems: 'center',
         opacity: pressed ? 0.5 : 1,
     }),

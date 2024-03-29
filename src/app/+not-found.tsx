@@ -1,7 +1,9 @@
 import {Link, Stack} from 'expo-router';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import {createStyleSheet, useStyles} from 'react-native-unistyles';
 
 export default function NotFoundScreen() {
+    const {styles} = useStyles(sheet);
     return (
         <>
             <Stack.Screen options={{title: 'Oops!'}} />
@@ -16,7 +18,7 @@ export default function NotFoundScreen() {
     );
 }
 
-const styles = StyleSheet.create({
+const sheet = createStyleSheet({
     container: {
         flex: 1,
         alignItems: 'center',

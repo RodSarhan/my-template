@@ -1,0 +1,10 @@
+{
+    "welcome-name": "Bienvenue, {{ name, titlecase }} !",
+    "confirm": "Confirmer",
+    "go-home": "Accueil",
+    "found-count-pokemon_one": "{{ count }} pokémon trouvé",
+    "found-count-pokemon_other": "{{ count }} pokémons trouvés",
+    "trigger-error": "Déclencher une erreur",
+    "sign-out": "Déconnexion",
+    "sign-in": "Connexion"
+}

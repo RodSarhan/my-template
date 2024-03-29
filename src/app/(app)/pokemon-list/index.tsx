@@ -1,15 +1,13 @@
 import {FontAwesome} from '@expo/vector-icons';
 import {useInfiniteQuery, useQuery} from '@tanstack/react-query';
-import {ErrorBoundaryProps, Link, Stack, router} from 'expo-router';
-import {useCallback, useRef, useState} from 'react';
-import {View, Text, Pressable, ScrollView, PressableStateCallbackType} from 'react-native';
+import {ErrorBoundaryProps, Link, Stack} from 'expo-router';
+import {useRef} from 'react';
+import {View, Text, Pressable} from 'react-native';
 import {createStyleSheet, useStyles} from 'react-native-unistyles';
-import {useUserStore} from '~global/GlobalStores/user-store';
 import {PokemonQueries} from '~networking/pokemon/queries/pokemon-queries';
 import {FlashList} from '@shopify/flash-list';
-import {INamedApiResource, IPokemon} from 'pokeapi-typescript';
-import {ExpoImage} from '~components/ExpoImage';
-import {queryClient} from '~libs/query-client';
+import {ExpoImage} from '~components/common/ExpoImage';
+import {queryClient} from '~networking/clients/query-client';
 import {useTranslation} from 'react-i18next';
 
 const PokemonComponent = ({
@@ -21,29 +19,21 @@ const PokemonComponent = ({
 }) => {
     const {data: pokemonDetails} = useQuery(PokemonQueries.pokemonDetailsQuery(pokemon.name));
 
-    const onPressPokemon = useCallback(() => {
-        router.navigate({
-            pathname: '/pokemon-list/[pokemon]',
-            params: {pokemon: pokemon.name},
-        });
-    }, [pokemon.name]);
-
     return (
-        <Pressable
-            onPress={onPressPokemon}
-            style={{alignItems: 'center', justifyContent: 'center', flex: 1}}
-        >
-            <ExpoImage
-                source={{uri: pokemonDetails?.sprite}}
-                style={{height: 100, width: 100}}
-            />
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemon.name}</Text>
-        </Pressable>
+        <Link href={`/pokemon-list/${pokemon.name}`} asChild>
+            <Pressable style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+                <ExpoImage
+                    source={{uri: pokemonDetails?.sprite}}
+                    style={{height: 100, width: 100}}
+                />
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>{pokemon.name}</Text>
+            </Pressable>
+        </Link>
     );
 };
 
 export default function PokemonListScreen() {
-    const {styles, theme} = useStyles(styleSheet);
+    const {styles, theme} = useStyles(sheet);
     const {t} = useTranslation();
     const flashlistRef = useRef<
         FlashList<{
@@ -57,10 +47,10 @@ export default function PokemonListScreen() {
         hasNextPage,
         isFetching,
         refetch,
-    } = useInfiniteQuery(PokemonQueries.paginatedPokemonQuery);
+    } = useInfiniteQuery(PokemonQueries.paginatedPokemonQuery());
 
     const onPressRefresh = () => {
-        queryClient.setQueryData(PokemonQueries.paginatedPokemonQuery.queryKey, (oldData) => {
+        queryClient.setQueryData(PokemonQueries.paginatedPokemonQuery().queryKey, (oldData) => {
             if (!oldData) return undefined;
             return {
                 ...oldData,
@@ -123,24 +113,11 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
     );
 }
 
-const styleSheet = createStyleSheet((theme, runtime) => ({
+const sheet = createStyleSheet((theme, runtime) => ({
     container: {
         flex: 1,
         backgroundColor: theme.colors.primary900,
         paddingTop: 10,
         width: '100%',
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: theme.colors.primary800,
-    },
-    pressable: ({pressed}: PressableStateCallbackType) => ({
-        backgroundColor: theme.colors.primary300,
-        padding: 10,
-        borderRadius: 10,
-        width: '50%',
-        alignItems: 'center',
-        opacity: pressed ? 0.5 : 1,
-    }),
 }));

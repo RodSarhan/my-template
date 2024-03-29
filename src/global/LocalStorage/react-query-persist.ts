@@ -1,4 +1,4 @@
-import {reactQueryStorage} from '~libs/mmkv-clients';
+import {reactQueryStorage} from '~global/LocalStorage/clients/mmkv-clients';
 import {createSyncStoragePersister} from '@tanstack/query-sync-storage-persister';
 
 const reactQueryPersistStorage = {

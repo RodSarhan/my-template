@@ -1,4 +1,4 @@
-import {zustandStorage} from '~libs/mmkv-clients';
+import {zustandStorage} from '~global/LocalStorage/clients/mmkv-clients';
 import {StateStorage} from 'zustand/middleware';
 
 const getZustandStorageValue = (key: string) => {
