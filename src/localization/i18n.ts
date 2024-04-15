@@ -58,7 +58,7 @@ export const initi18n = () => {
     });
 };
 
-if (isWeb) {
+if (!isWeb) {
     initi18n();
 }
 

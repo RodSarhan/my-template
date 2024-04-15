@@ -44,6 +44,11 @@ export default function HomeScreen() {
                     <Text style={styles.buttonLabel}>Go To Pokemon List</Text>
                 </Pressable>
             </PressableLink>
+            <PressableLink href="/testing-screen/" asChild style={styles.button}>
+                <Pressable>
+                    <Text style={styles.buttonLabel}>Testing Screen</Text>
+                </Pressable>
+            </PressableLink>
             <Pressable onPress={onPressSignOut} style={styles.button}>
                 <Text style={styles.buttonLabel}>{t('sign-out')}</Text>
             </Pressable>
